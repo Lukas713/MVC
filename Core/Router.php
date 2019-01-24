@@ -30,7 +30,11 @@ class Router{
         //e.x. {controller}\/{action} into (?P<controller>[a-z-]+)\/(?P<action>[a-z-]+)
         $route = preg_replace('/\{([a-z]+)\}/', '(?P<\1>[a-z-]+)', $route);
 
-        //add start and end delimeters and case insensitive flag (^, $, i)
+        //convert variables with custom regular expression
+        //e.x. {id:\d+}
+        $route  = preg_replace('/\{([a-z]+):([^\}]+)\}/', '(?P<\1>\2)', $route);
+
+        //add starting and ending delimeters and case insensitive flag (^, $, i)
         //e.x. (?P<controller>[a-z-]+)\/(?P<action>[a-z-]+) into /^(?P<controller>[a-z-]+)\/(?P<action>[a-z-]+)$/i
         $route = '/^' . $route . '$/i';
 

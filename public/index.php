@@ -12,6 +12,7 @@ $router = new Router();
 $router->add('', ['controller' => 'home', 'action' => 'index']);
 $router->add('posts', ['controller' => 'Posts', 'action' => 'index']);
 $router->add('{controller}/{action}');
+$router->add('{controller}/{id:\d+}/{action}');
 $router->add('admin/{controller}/{action}');
 
 
