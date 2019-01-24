@@ -3,6 +3,8 @@
 /*
  * Front controller
 */
+require "../App/Controllers/Post.php";
+
 /*Routing*/
 require "../Core/Router.php";
 
@@ -15,27 +17,5 @@ $router->add('{controller}/{action}');
 $router->add('{controller}/{id:\d+}/{action}');
 $router->add('admin/{controller}/{action}');
 
-
-//Match the requested route
-$url = $_SERVER["QUERY_STRING"];
-if($router->match($url)){   //e.x.  /employees/new
-
-    echo '<pre>';
-    print_r($router->getRoutes());
-
-    echo "<hr>";
-
-    echo var_dump($router->getParams());
-    echo '</pre>';
-
-}else {
-    echo "No routes found for URL: " . $url;
-    echo '<hr>';
-    echo '<pre>';
-    print_r($router->getRoutes());
-
-    echo "<hr>";
-
-    echo var_dump($router->getParams());
-    echo '</pre>';
-}
+$url = $_SERVER['QUERY_STRING'];
+$router->dispatch($url);

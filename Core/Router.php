@@ -82,4 +82,60 @@ class Router{
     public function getParams(){
         return $this->params;
     }
+
+    /* follow the route
+
+     * @param string, The URL route
+     * @return void
+     * */
+    public function dispatch($url){
+        if(!$this->match($url)){    //check if URL got corresponding route
+            echo "Error 404!";
+            return;
+        }
+        //take controller and convert it to corresponding string format
+        $controller = $this->params['controller'];
+        $controller = $this->convertToStudyCase($controller);
+
+        if(!class_exists($controller)){ //check if controller class exists
+            echo "Class " . $controller . " does not exists!";
+            return;
+        }
+        //create controller object, extract action, convert it to corresponding string format
+        $controllerObject = new $controller();
+        $action = $this->params['action'];
+        $action = $this->convertToCamelCase($action);
+
+        if(!is_callable([$controllerObject, $action])){   //check if controller Class has searched action
+            echo "Action " . $action . " does not exists!";
+            return;
+        }
+        $controllerObject->$action();   //invoke action and class that are searched in URL
+    }
+
+    /*
+     * replace '-' with ' '
+     * set each first letter into upper letter
+     * replace ' ' with ''
+     * @param string
+     * @return string
+     *
+     * e.x. new-employee into NewEmployee
+     * */
+    protected function convertToStudyCase($string){
+        return str_replace(' ', '', ucwords(str_replace('-', ' ', $string)));
+    }
+
+    /*
+     * convert string into study case
+     * convert just first letter into lower letter
+     * @param string
+     * @return string
+     *
+     * e.x. add-new into addNew
+     */
+    protected function convertToCamelCase($string){
+        return lcfirst($this->convertToStudyCase($string));
+    }
+
 }
