@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 class Router{
     /*
      *  Associative array of routes (table of routes)
@@ -96,6 +98,7 @@ class Router{
         //take controller and convert it to corresponding string format
         $controller = $this->params['controller'];
         $controller = $this->convertToStudyCase($controller);
+        $controller = "App\Controllers\\$controller";
 
         if(!class_exists($controller)){ //check if controller class exists
             echo "Class " . $controller . " does not exists!";

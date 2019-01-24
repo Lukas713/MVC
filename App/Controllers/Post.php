@@ -1,7 +1,8 @@
 <?php
 
-class Post {
+namespace App\Controllers;
 
+class Post {
     /* show the index page
         @return void
     */
