@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use \Core\View;
+
 class Home extends \Core\Controller {
 
     /* show index page inside controller
@@ -10,17 +12,17 @@ class Home extends \Core\Controller {
 
     */
     public function index(){
-        echo 'Hello World, I am index page inside Home controller';
+        View::render('Home/index.php');
+    }
+
+    protected function before()
+    {
+        echo 'I am method that is invoked before' . '<hr>';
     }
 
     protected function after()
     {
 
-        echo '<hr>' . 'I am invoked after';
-    }
-
-    protected function before()
-    {
-        echo 'I am invoked before' . '<hr>';
+        echo '<hr>' . 'I am method that is invoked after';
     }
 }

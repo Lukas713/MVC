@@ -11,6 +11,7 @@ class Router{
 
     /*
      * Parameters from matched routes
+     * e.x. [controller => 'Post', [action] => 'index']
      * @var array
      */
     protected $params = [];
