@@ -105,7 +105,7 @@ class Router{
         //take controller and convert it to corresponding string format
         $controller = $this->params['controller'];
         $controller = $this->convertToStudyCase($controller);
-        $controller = "App\Controllers\\$controller";
+        $controller = $this->getNamespace() . $controller;
 
         if(!class_exists($controller)){ //check if controller class exists
             echo "Class " . $controller . " does not exists!";
@@ -165,6 +165,19 @@ class Router{
             }
         }
         return $url;
+    }
+
+    /*get the namespace for the controller class
+    namespace defined in the route parameters is added if presented
+
+    @return string  request URL */
+    protected function getNamespace(){
+       $namespace = '\App\Controllers\\';
+
+       if(array_key_exists('namespace', $this->params)){
+           $namespace = $namespace . $this->params['namespace'] . '\\';
+       }
+       return $namespace;
     }
 
 }
