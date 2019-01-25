@@ -5,17 +5,12 @@
 
 spl_autoload_register(function($class){ //load class e.x. Core\Router();
     $root = dirname(__DIR__); //parent directory    e.x. C:/xampp/htdocs/MVC
-    echo "<hr>" . $root . "<hr>";
     $file = $root . '/' . str_replace('\\', '/', $class) . '.php'; //e.x. C:/xampp/htdocs/MVC/Core/Router.php
     if(is_readable($file)){ //if file exists and its readable
         //require that path
         require  $root . '/' . str_replace('\\', '/', $class) . '.php';
     }
 });
-
-/*
- *
- * */
 
 /*Routing*/
 $router = new Core\Router();

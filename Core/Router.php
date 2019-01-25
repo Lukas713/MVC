@@ -86,15 +86,22 @@ class Router{
     }
 
     /* follow the route
-
+     * create controller object and invoke action method from URL if exists
      * @param string, The URL route
      * @return void
      * */
     public function dispatch($url){
+        $url = $this->removeQueryStringVariable($url);
+
         if(!$this->match($url)){    //check if URL got corresponding route
             echo "Error 404!";
             return;
         }
+        //if user knows our logic for invoking action filters
+        if(preg_match('/action$/i', $this->params['action']) != 0){
+            throw new \Exception("Action $this->params['action'] cant be called directly from URL!");
+        }
+
         //take controller and convert it to corresponding string format
         $controller = $this->params['controller'];
         $controller = $this->convertToStudyCase($controller);
@@ -105,14 +112,11 @@ class Router{
             return;
         }
         //create controller object, extract action, convert it to corresponding string format
-        $controllerObject = new $controller();
-        $action = $this->params['action'];
+        $controllerObject = new $controller($this->params);
+
+        $action = $this->params['action'] . '@Action';  //set name to action@Action to invoke __call
         $action = $this->convertToCamelCase($action);
 
-        if(!is_callable([$controllerObject, $action])){   //check if controller Class has searched action
-            echo "Action " . $action . " does not exists!";
-            return;
-        }
         $controllerObject->$action();   //invoke action and class that are searched in URL
     }
 
@@ -139,6 +143,28 @@ class Router{
      */
     protected function convertToCamelCase($string){
         return lcfirst($this->convertToStudyCase($string));
+    }
+
+    /*
+     * removes query string variables from URL
+     * but still can access then in $_GET global variable
+     *
+     * mvc.com/post/index?page=1  ----->  post/index?page=1  -----> post/index
+     *
+     * @param string
+     * @return string
+     * */
+    protected function removeQueryStringVariable($url){
+        if($url != ''){
+            $parts = explode('&', $url, 2); //split url, first half is before & and second is after
+            //if first half contains equality sign, URL is  e.x. empty mvc.com?page=2 = ''
+            if(strpos($parts[0], '=') === false){
+                $url = $parts[0];
+            }else {
+                $url = '';
+            }
+        }
+        return $url;
     }
 
 }

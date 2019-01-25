@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class Home {
+class Home extends \Core\Controller {
 
     /* show index page inside controller
 
@@ -11,5 +11,16 @@ class Home {
     */
     public function index(){
         echo 'Hello World, I am index page inside Home controller';
+    }
+
+    protected function after()
+    {
+
+        echo '<hr>' . 'I am invoked after';
+    }
+
+    protected function before()
+    {
+        echo 'I am invoked before' . '<hr>';
     }
 }
