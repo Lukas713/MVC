@@ -112,9 +112,9 @@ class Router{
             echo "Class " . $controller . " does not exists!";
             return;
         }
-        //create controller object, extract action, convert it to corresponding string format
+        //create controller object
         $controllerObject = new $controller($this->params);
-
+        //extract action, convert it to corresponding string format
         $action = $this->params['action'] . '@Action';  //set name to action@Action to invoke __call
         $action = $this->convertToCamelCase($action);
 

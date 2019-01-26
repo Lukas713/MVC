@@ -31,7 +31,7 @@ abstract class Controller
     /*
      * magic methods is invoked at the end of the dispatcher
      * invoke method before desired action
-     * desired action
+     * invoke desired action
      * invoke method after desired action
      * @param string & array
      * @return void
@@ -55,8 +55,6 @@ abstract class Controller
     protected function after(){
 
     }
-
-
 
     protected function before(){
 
