@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Controllers;
+use \Core\View;
 
 class Post extends \Core\Controller {
     /* show the index page
         @return void
     */
     public function index(){
-        echo 'Hello World, I am index action inside Post controller';
-        echo '<pre>' . htmlspecialchars(print_r($_GET, true)) . '</pre>';
+        View::renderTemplate('Post/index.html');
     }
 
     /*
