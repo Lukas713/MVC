@@ -8,7 +8,7 @@ class Post extends \Core\Controller {
         @return void
     */
     public function index(){
-        View::renderTemplate('Post/index.html');
+        View::render('Post/index.html');
     }
 
     /*

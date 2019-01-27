@@ -12,7 +12,7 @@ class Home extends \Core\Controller {
 
     */
     public function index(){
-        View::renderTemplate('Home/index.html', [
+        View::render('Home/index.html', [
                 'name' => 'lukas',
                 'colour' => 'black',
                 'cars' => ['polo', 'audi', 'bmw']

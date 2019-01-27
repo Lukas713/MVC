@@ -4,22 +4,6 @@ namespace Core;
 
 class View {
     /*render a view file
-
-    @param string, view file
-    @return void
-    */
-    public function render($view, $arguments = []){
-
-        extract($arguments, EXTR_SKIP);
-        $file = "../App/Views/$view";   //path relative to Core directory
-
-        if(!is_readable($file)){
-            echo $file . ' not found!';
-            return;
-        }
-        require $file;
-    }
-
     /*
     render a view using Twig
 
@@ -28,7 +12,7 @@ class View {
 
     @return void
     */
-    public static function renderTemplate($template, $arguments = []){
+    public static function render($template, $arguments = []){
 
         static $twig = null;    //maintain its value between function calls
 
