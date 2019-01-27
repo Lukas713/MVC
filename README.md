@@ -14,8 +14,8 @@
     .htaccess
     l-index.php
    d-vendor
-   <\pre>
-<hr>
+   </pre>
+   <hr>
 
 <h3> Routing: how URLs are processed in n MVC framework </h3>
       <ol>
