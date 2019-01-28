@@ -16,7 +16,6 @@
    d-vendor
    </pre>
    <hr>
-
 <h3> Routing: how URLs are processed in n MVC framework </h3>
       <ol>
         <li>Create a central entry point to the framework: the front controller</li>
@@ -36,10 +35,22 @@
          <li>Make views easier to create and maintain: add a template engine (with Twig)</li>
          <li>Remove repetition in the view templates: add a base template to inherit from</li>
      </ol><hr>
- <h3>Models</h3><hr>
+ <h3>Models</h3>
+     <ol>
+        <li> Add a model, get data from the database and display it in a view</li>
+        <li>Optimise the database connection: connect only on demand and reuse it</li>
+     </ol>
  <h3>Manage code using Composer</h3>
     <ol>
         <li>Install the template engine library Twig using Composer</li>
         <li>Include all package classes automatically using the Composer autoloader</li>
         <li>Replace the autoload function with the Composer autoloader</li>
+    </ol>
+ <h3>Error handling</h3>
+    <ol>
+        <li>Put application configuration settings in a separate file</li>
+        <li>Handle errors: convert errors to exceptions and add an exception handler</li>
+        <li>Handle errors: convert errors to exceptions and add an exception handler</li>
+        <li>Categorise different types of error using HTTP status codes</li>
+        <li>Add views to make error pages look nicer for users</li>
     </ol>
