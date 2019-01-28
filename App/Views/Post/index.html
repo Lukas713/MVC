@@ -6,7 +6,15 @@
 
 <div>
     <h1>Hello my friend, this is Post page</h1> <hr>
-    <p>I dont have any information for you here, yet!</p>
+
+    <ol>
+        {% for post in posts %}
+        <li>{{post.title}}</li>
+        <li>{{post.content}}</li>
+        {% endfor %}
+    </ol>
+
+
 </div>
 
 {% endblock %}

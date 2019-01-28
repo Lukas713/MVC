@@ -39,9 +39,11 @@ abstract class Controller
     public function __call($name, $arguments)
     {
         $method = preg_replace('/@Action/', '', $name);
+
         if(!method_exists($this, $method)){
-            echo 'Action does not exist in ' . get_class($this) . ' class!';
-            return;
+            throw new \Exception("Method: $method not found in controller: "
+                                    . get_class($this));
+
         }
 
         if($this->before() !== false){
@@ -49,7 +51,7 @@ abstract class Controller
             $this->after();
             return;
         }
-        echo 'I am sorry, you fucked up something!';
+        throw new \Exception("I'm sorry, something went wrong!");
     }
 
     protected function after(){

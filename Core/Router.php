@@ -95,8 +95,7 @@ class Router{
         $url = $this->removeQueryStringVariable($url);
 
         if(!$this->match($url)){    //check if URL got corresponding route
-            echo "Error 404!";
-            return;
+            throw new \Exception("No route: $url matched", 404);
         }
         //if user knows our logic for invoking action filters
         if(preg_match('/action$/i', $this->params['action']) != 0){
@@ -109,8 +108,7 @@ class Router{
         $controller = $this->getNamespace() . $controller;
 
         if(!class_exists($controller)){ //check if controller class exists
-            echo "Class " . $controller . " does not exists!";
-            return;
+            throw new \Exception("Class $controller does not exists!");
         }
         //create controller object
         $controllerObject = new $controller($this->params);

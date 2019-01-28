@@ -3,20 +3,17 @@
  * Front controller
 */
 
-/*Twig autoloader*/
+/*Twig autoloader (class autoloader)*/
 require '../vendor/autoload.php';
 // composer dump-autoload
 
-/*Class autoloader
-spl_autoload_register(function($class){ //load class e.x. Core\Router();
-    $root = dirname(__DIR__); //parent directory    e.x. C:/xampp/htdocs/MVC
-    $file = $root . '/' . str_replace('\\', '/', $class) . '.php'; //e.x. C:/xampp/htdocs/MVC/Core/Router.php
-    if(is_readable($file)){ //if file exists and its readable
-        //require that path
-        require  $root . '/' . str_replace('\\', '/', $class) . '.php';
-    }
-});
+/*Error and exception handler
+http://php.net/manual/en/function.set-error-handler.php
 */
+error_reporting(E_ALL);
+set_error_handler('Core\Error::errorHandler');
+set_exception_handler('Core\Error::exceptionHandler');
+
 /*Routing*/
 $router = new Core\Router();
 

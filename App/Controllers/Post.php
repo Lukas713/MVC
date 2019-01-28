@@ -1,14 +1,20 @@
 <?php
 
 namespace App\Controllers;
+
 use \Core\View;
+use App\Models\Posts;
 
 class Post extends \Core\Controller {
     /* show the index page
         @return void
     */
     public function index(){
-        View::render('Post/index.html');
+        $result = Posts::getAll();
+
+        View::render('Post/index.html', [
+            'posts' => $result
+        ]);
     }
 
     /*
