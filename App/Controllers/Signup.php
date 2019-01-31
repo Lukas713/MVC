@@ -9,7 +9,7 @@
 namespace App\Controllers;
 
 use \Core\View;
-use \App\Models\User;
+use \App\Models\Users;
 
 
 class Signup extends \Core\Controller
@@ -23,9 +23,14 @@ class Signup extends \Core\Controller
     }
 
     public function create(){
-        $user = new User($_POST);
-        $user->save();
+        $user = new Users($_POST);
+        if(!$user->save()){
 
+            View::render('Signup/register.html', [
+                'user' => $user
+            ]);
+            return;
+        }
         View::render('Signup/success.html');
     }
 }

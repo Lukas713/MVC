@@ -27,5 +27,5 @@ class Config {
     /*Show or hide error messages on the screen
      @var bool
     */
-    const SHOW_ERRORS = false;
+    const SHOW_ERRORS = true;
 }
